@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'dart:developer';
 
 class Product {
   const Product({required this.imUr, required this.name, required this.cuan});
