@@ -1,32 +1,41 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
+
+//CLASE PRODUCTO
 class Product {
-  const Product({required this.imUr, required this.name, required this.cuan});
+  const Product({required this.imUr, required this.name, required this.cant, required this.cuan});
   final String imUr;
   final String name;
-  final int cuan;
+  final String cuan;
+  final String cant;
 }
 
+//??????????????
 class Saucer {
   const Saucer ({required this.pro});
   final Product pro;
 }
 
+//MAIN CORRE APP
 void main() {
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const color1 = Color(0xffEDB506);
     return MaterialApp(
       title: 'Inventario',
       theme: ThemeData(
-        canvasColor: Colors.white,
-        primarySwatch: Colors.amber,
+        canvasColor: color1,
+        primarySwatch: Colors.deepOrange
       ),
       home: const MyHomePage(),
     );
@@ -40,6 +49,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
 
   @override
@@ -49,13 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Image.asset("images/logo.png"),
-              //child: Image.network("https://th.bing.com/th/id/OIP.rO_erAHn811Sm0TR4TohQgHaHa?pid=ImgDet&rs=1",
-
+            const CircleAvatar(
+            radius: 90,
+            backgroundImage: AssetImage("images/logo.png"),
             ),
-
             Padding(
               padding: EdgeInsets.all(10.0),
               child: ElevatedButton(
@@ -113,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     MaterialPageRoute(builder: (context) => Visua()),
                   );
                 },
-                child: const Text('Consumo'),
+                child: const Text('Visualizar'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
                   onPrimary: Colors.black,
@@ -169,9 +176,27 @@ class Invent extends StatelessWidget {
           children: [
             ShoppingList(
               products: [
-                Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:5),
-                Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne', cuan:8),
-                Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Lechuga', cuan:3),
+                Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
+                Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+                Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Cebolla', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Queso amarillo', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'BBQ', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Piña', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Refrescos', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Aguas', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Catsup', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Mayonesa', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Mostaza', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Chile', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Pepinillo', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Sevilletas', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Papas', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Salchichas', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Pan p/hot dog', cuan:'0', cant: '0'),
               ],
             ),
             Icon(Icons.work_off_outlined),
@@ -193,12 +218,30 @@ class Surt extends StatelessWidget {
         backgroundColor: Colors.amber,
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: ShoppingList(
           products: [
-            Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:5),
-            Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne', cuan:8),
-            Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Lechuga', cuan:3),
+        Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
+        Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+        Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Cebolla', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Queso amarillo', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'BBQ', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Piña', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Refrescos', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Aguas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Catsup', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Mayonesa', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Mostaza', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Chile', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pepinillo', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Sevilletas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Papas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Salchichas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pan p/hot dog', cuan:'0', cant: '0'),
           ],
         ),
       ),
@@ -218,17 +261,34 @@ class Visua extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Consumo"),
+        title: Text("Visualizar"),
         backgroundColor: Colors.amber,
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: ShoppingList(
           products: [
-            //Se tomara directo de la base de datos
-        Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:5),
-        Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne', cuan:8),
-        Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Lechuga', cuan:3),
+        Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
+        Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+        Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Cebolla', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Queso amarillo', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'BBQ', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Piña', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Refrescos', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Aguas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Catsup', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Mayonesa', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Mostaza', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Chile', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pepinillo', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Sevilletas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Papas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Salchichas', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pan p/hot dog', cuan:'0', cant: '0'),
           ],
         ),
       ),
@@ -263,6 +323,12 @@ class ShoppingListItem extends StatelessWidget {
             color: Colors.black,
             fontSize: 20,
           ),
+      ),
+      subtitle: TextField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: product.cant,
+        ),
       ),
       trailing: Text(product.cuan.toString(),
         style: TextStyle(
