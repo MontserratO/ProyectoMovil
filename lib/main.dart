@@ -317,9 +317,10 @@ class ShoppingListItem extends StatelessWidget {
       margin: const EdgeInsets.all(15.0),
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black)
+          border: Border.all(color: Colors.grey)
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
             radius: 25.0,
@@ -333,21 +334,26 @@ class ShoppingListItem extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          //Padding(padding: EdgeInsets.fromLTRB(90, 0, 90, 0),),//separador
-          Container(
-            //alignment: Alignment.centerLeft,
-              width: 50.0,
-              child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),)
-              )
-          ),
-          Text(product.cuan.toString(),
-            style: TextStyle(
-              color: Colors.amber,
-              fontSize: 20,
-            ),
-          ),
+         // Padding(padding: EdgeInsets.fromLTRB(90, 0, 90, 0),),//separador
+
+          Row(
+            children: [
+              Container(
+                //alignment: Alignment.centerLeft,
+                  width: 50.0,
+                  child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),)
+                  )
+              ),
+              Text(product.cuan.toString(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
