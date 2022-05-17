@@ -31,11 +31,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const color1 = Color(0xffEDB506);
+    const color2 = Color(0xffffffff);
     return MaterialApp(
       title: 'Inventario',
       theme: ThemeData(
-        canvasColor: color1,
-        primarySwatch: Colors.deepOrange
+        canvasColor: Colors.white,
+        primarySwatch: Colors.amber,
       ),
       home: const MyHomePage(),
     );
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const CircleAvatar(
             radius: 90,
-            backgroundImage: AssetImage("images/logo.png"),
+            backgroundImage: AssetImage("images/logo2.jpg"),
             ),
             Padding(
               padding: EdgeInsets.all(10.0),
@@ -176,9 +177,9 @@ class Invent extends StatelessWidget {
           children: [
             ShoppingList(
               products: [
-                Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
-                Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
-                Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Pan', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+                Product(imUr:'', name: 'Carne Tradicional', cuan:'0', cant: '0'),
                 Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
                 Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
                 Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
@@ -221,9 +222,9 @@ class Surt extends StatelessWidget {
       body: const Center(
         child: ShoppingList(
           products: [
-        Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
-        Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
-        Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pan', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Carne Tradicional', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
@@ -247,6 +248,7 @@ class Surt extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          //cambiar diseño
             //se agregarian directamente a la base de datos
         },
         child: const Icon(Icons.add),
@@ -268,9 +270,9 @@ class Visua extends StatelessWidget {
       body: const Center(
         child: ShoppingList(
           products: [
-        Product(imUr:'https://img2.freepng.es/20180511/zuq/kisspng-bun-hamburger-small-bread-bakery-stock-photography-5af57ff732a814.1235732815260385192075.jpg', name: 'Pan', cuan:'0', cant: '0'),
-        Product(imUr:'https://bidea2.com/wp-content/uploads/2020/10/hamburguesa.png', name: 'Carne Arrachera', cuan:'0', cant: '0'),
-        Product(imUr:'https://www.pngmart.com/files/16/Butterhead-Green-Lettuce-PNG-Transparent-Image.png', name: 'Carne Tradicional', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Pan', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Carne Arrachera', cuan:'0', cant: '0'),
+        Product(imUr:'', name: 'Carne Tradicional', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Lechuga', cuan:'0', cant: '0'),
         Product(imUr:'', name: 'Jitomate', cuan:'0', cant: '0'),
@@ -311,7 +313,49 @@ class ShoppingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(3.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black)
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 25.0,
+            backgroundImage:
+            NetworkImage(product.imUr),
+            backgroundColor: Colors.transparent,
+          ),
+          Text(product.name,
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 20,
+            ),
+          ),
+          //Padding(padding: EdgeInsets.fromLTRB(90, 0, 90, 0),),//separador
+          Container(
+            //alignment: Alignment.centerLeft,
+              width: 50.0,
+              child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),)
+              )
+          ),
+          Text(product.cuan.toString(),
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+ /*
+      ListTile(
       leading: CircleAvatar(
         radius: 25.0,
         backgroundImage:
@@ -320,26 +364,26 @@ class ShoppingListItem extends StatelessWidget {
       ),
       title: Text(product.name,
         style: TextStyle(
-            color: Colors.black,
+            color: Colors.amber,
             fontSize: 20,
           ),
       ),
-      subtitle: TextField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: product.cant,
-        ),
-      ),
-      trailing: Text(product.cuan.toString(),
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          backgroundColor: Colors.amber,
-        ),
-      ),
-    );
+      //subtitle: TextField(
+        //decoration: InputDecoration(
+          //border: OutlineInputBorder(),
+          //hintText: product.cant,
+        //),
+      //),
+      trailing:Text(product.cuan.toString(),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              backgroundColor: Colors.amber,
+            ),
+          ),
+      );
   }
-}
+*/
 
 class ShoppingList extends StatefulWidget {
   const ShoppingList({required this.products, Key? key}) : super(key: key);
