@@ -1,6 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:proyectof/models/alimento.dart';
+import 'package:proyectof/models/ingredient.dart';
+import 'package:proyectof/models/ingrediente_alimento.dart';
 
 //CLASE PRODUCTO
 class Product {
@@ -194,6 +198,7 @@ class Invent extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             //agregar ingrediente
+
           },
           child: const Icon(Icons.add),
         ),
@@ -217,6 +222,9 @@ class Surt extends StatelessWidget {
         child: SalesList(
           saucers: [
             //leer de la base de datos
+            Operation.insertIngredient(Ingredient(id: 1, name: 'Carne', amount: 11, image: '', limit: 12));
+            Operation.insertAlimento(Alimento(id: 1, name: 'Hamburguesa', image: ''));
+            Operation.insertIngredienteAlimento(AlimentoIngrediente(id: 1, idAlimento: 1, idIngrediente: 1, amount: 1));
           ],
         ),
       ),
