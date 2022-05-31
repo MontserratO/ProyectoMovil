@@ -6,6 +6,8 @@ import 'package:proyectof/models/alimento.dart';
 import 'package:proyectof/models/ingredient.dart';
 import 'package:proyectof/models/ingrediente_alimento.dart';
 
+import 'db/operation.dart';
+
 //CLASE PRODUCTO
 class Product {
   const Product({required this.imUr, required this.name, required this.cuan, required this.cant, required this.lim});
@@ -37,8 +39,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const color1 = Color(0xffEDB506);
-    const color2 = Color(0xffffffff);
     return MaterialApp(
       title: 'Inventario',
       theme: ThemeData(
@@ -222,9 +222,6 @@ class Surt extends StatelessWidget {
         child: SalesList(
           saucers: [
             //leer de la base de datos
-            Operation.insertIngredient(Ingredient(id: 1, name: 'Carne', amount: 11, image: '', limit: 12));
-            Operation.insertAlimento(Alimento(id: 1, name: 'Hamburguesa', image: ''));
-            Operation.insertIngredienteAlimento(AlimentoIngrediente(id: 1, idAlimento: 1, idIngrediente: 1, amount: 1));
           ],
         ),
       ),
@@ -237,8 +234,6 @@ class Surt extends StatelessWidget {
     );
   }
 }
-
-
 
 
 
@@ -407,6 +402,119 @@ class _SalesListState extends State<SalesList> {
           );
         }).toList(),
       ),
+    );
+  }
+}
+
+
+//ingredientes
+class _MyList extends StatefulWidget {
+  @override
+  State<_MyList> createState() => _MyListState();
+}
+
+class _MyListState extends State<_MyList> {
+  List<Ingredient> ingredients = [];
+
+  @override
+  void initState() {
+    _loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: ingredients.length,
+      itemBuilder: (_, i) => _createItem(i),
+    );
+  }
+
+  _loadData() async {
+    List<Ingredient> auxIngredient = await Operation.ingredients();
+    setState(() {
+      ingredients = auxIngredient;
+    });
+  }
+
+  _createItem(int i){
+    return ListTile(
+      title: Text(ingredients[i].name),
+    );
+  }
+}
+
+//Alimentos
+class _MyList1 extends StatefulWidget {
+  @override
+  State<_MyList1> createState() => _MyListState1();
+}
+
+class _MyListState1 extends State<_MyList1> {
+  List<Alimento> alimentos = [];
+
+  @override
+  void initState() {
+    _loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: alimentos.length,
+      itemBuilder: (_, i) => _createItem(i),
+    );
+  }
+
+  _loadData() async {
+    List<Alimento> auxIngredient = await Operation.alimentos();
+    setState(() {
+      alimentos = auxIngredient;
+    });
+  }
+
+  _createItem(int i){
+    return ListTile(
+      title: Text(alimentos[i].name),
+    );
+  }
+}
+
+
+// Relación
+class _MyList2 extends StatefulWidget {
+  @override
+  State<_MyList2> createState() => _MyListState2();
+}
+
+class _MyListState2 extends State<_MyList2> {
+  List<AlimentoIngrediente> alimentosIngredientes = [];
+
+  @override
+  void initState() {
+    _loadData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: alimentosIngredientes.length,
+      itemBuilder: (_, i) => _createItem(i),
+    );
+  }
+
+  _loadData() async {
+    List<AlimentoIngrediente> auxIngredient = await Operation.alimentoIngredientes();
+    setState(() {
+      alimentosIngredientes = auxIngredient;
+    });
+  }
+
+  _createItem(int i){
+    return ListTile(
+      title: Text(alimentosIngredientes[i].id.toString() + '__' + alimentosIngredientes[i].idIngrediente.toString() + '__' + alimentosIngredientes[i].idAlimento.toString()),
     );
   }
 }
